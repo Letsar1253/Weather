@@ -49,10 +49,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Resources\Images\svg.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiXaml Update="Resources\NewPage1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
