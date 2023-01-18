@@ -1,4 +1,6 @@
-﻿namespace Weather;
+﻿using Weather.Resources.WeatherModel;
+
+namespace Weather;
 
 enum WeatherType {
     Sunny,
@@ -57,9 +59,11 @@ public partial class MainPage : ContentPage {
     }
 
     /** Функция определяет соотношение исходного размера термометра с размерами страницы. */
-    private void setInfoPanel( DateTime date ) {
-        DateInfo.Text = "Четверг, 14 июля";
-        TemperatureInfo.Text = "30 ℃";
+    private void setInfoPanel( DateTime date, double temperature ) {
+        //DateInfo.Text = "Четверг, 14 июля";
+        //TemperatureInfo.Text = "30 ℃";
+        DateInfo.Text = date.DayOfWeek.ToString() + ", " + date.Day + " " + date.Month;
+        TemperatureInfo.Text = Math.Round(temperature,1).ToString() + " ℃";
     }
 
     /**
@@ -135,11 +139,12 @@ public partial class MainPage : ContentPage {
     }
 
     /** */
-    public void setupPage(/*здесь получаем данные и прокидываем везде где надо*/)
+    public void setupPage(WeatherModel weatherData)
     {
-        setWeatherImage(WeatherType.Sunny);
-        setTemperature(50);
-        setInfoPanel(new DateTime());
+
+        setWeatherImage(WeatherType.Cloudly);
+        setTemperature(weatherData.TemperatureValue);
+        setInfoPanel(weatherData.Day, weatherData.TemperatureValue);
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */

@@ -1,7 +1,10 @@
-﻿namespace Weather;
+﻿using Weather.Resources.WeatherModel;
+
+namespace Weather;
 
 public partial class App : Application {
 	private static readonly Dictionary<DateTime, MainPage> WeatherPages = new();
+	private static WeatherGetter weatherGetter = new WeatherGetter();
     public App() {
 		InitializeComponent();
 		MainPage = new MainPage();
@@ -12,8 +15,9 @@ public partial class App : Application {
 			return weatherPage;
         } else {
 			// var weatherData = await Метод, которым получаем данные о погоде дня...
-			var newPage = new MainPage();
-			newPage.setupPage();
+			var weatherData = await weatherGetter.GetData(day);
+            var newPage = new MainPage();
+			newPage.setupPage(weatherData);
 
             WeatherPages[day] = newPage;
 
