@@ -1,4 +1,5 @@
-﻿using Weather.Resources.WeatherModel;
+﻿using System.Security.Cryptography;
+using Weather.Resources.WeatherModel;
 
 namespace Weather;
 
@@ -146,17 +147,19 @@ public partial class MainPage : ContentPage {
         setTemperature(weatherData.TemperatureValue);
         setInfoPanel(weatherData.Day, weatherData.TemperatureValue);
     }
-
+    private static DateTime dayNumber = DateTime.Now;
     /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */
     private async void OnClickPreviousDayButton(object _, EventArgs __)
     {
-        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now.AddDays(-1) /*при передаче даты, создать на предыдущий день (время 00:00)*/));
+        dayNumber = dayNumber.AddDays(-1);
+        await Navigation.PushModalAsync(await App.GetPageByDay(dayNumber /*при передаче даты, создать на предыдущий день (время 00:00)*/));
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на следующий день. */
     private async void OnClickNextDayButton(object _, EventArgs __)
     {
-        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now.AddDays(1) /*при передаче даты, создать на следующий день (время 00:00)*/));
+        dayNumber = dayNumber.AddDays(1);
+        await Navigation.PushModalAsync(await App.GetPageByDay(dayNumber /*при передаче даты, создать на следующий день (время 00:00)*/));
     }
 
     /** 
