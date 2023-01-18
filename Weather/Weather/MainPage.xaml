@@ -28,25 +28,27 @@
                 VerticalOptions="End">
                 <Rectangle
                     x:Name= "ThermometerBar"
-                    Fill = "#097A86"
-                    RadiusX = "5"
+                    Fill = "#DB5166"
+                    RadiusX = "20"
                     RadiusY = "10"
-                    WidthRequest = "60"/>
+                    WidthRequest = "0"
+                    HeightRequest = "0"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 HorizontalOptions="Center"
-                VerticalOptions="End"
-                Margin = "0,0,0,0">
+                VerticalOptions="End">
                 <Label BindingContext = "{x:Reference ThermometerBar}"
-                    Margin="0"
                     x:Name="ThermometerBarValue"
-                    Text="asd" FontSize="Large"/>
+                    Text="" 
+                    FontSize="Large"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 VerticalOptions="End"
                 HorizontalOptions="Start"
-                x:Name="InformationLayout">
-                <Rectangle
+                x:Name="InformationLayout" 
+                Margin="0,0,0,50" 
+                MaximumWidthRequest="200">
+                <!--<Rectangle
                     x:Name = "DateInfoPanel"
                     Fill="Blue"
                     Stroke="Black"
@@ -55,7 +57,38 @@
                     RadiusY="10"
                     WidthRequest="200"
                     HeightRequest="100"
-                    HorizontalOptions="Start" />
+                    HorizontalOptions="Start">
+                </Rectangle>-->
+                <!--<Button 
+                    Text="Click to Rotate Text!"
+                    Clicked="Button_Clicked" 
+                    BackgroundColor="AliceBlue"
+                    TextColor="Black"
+                    Opacity="0.5"
+                    BorderWidth="3"
+                    BorderColor="Black" MaximumWidthRequest="150"
+                    />-->
+                <Frame 
+                    BorderColor="AliceBlue"
+                    CornerRadius="5"
+                    Padding="8" 
+                    Margin="10,0,0,100"
+                    Opacity="0.8">
+                    <StackLayout>
+                        <Label 
+                            Text="Информация"
+                            FontSize="16"
+                            FontAttributes="Bold" />
+                        <BoxView 
+                            Color="Grey"
+                            HeightRequest="2"
+                            HorizontalOptions="Fill" />
+                        <Label Text="Четверг, 14 июля"/>
+                        <Label 
+                            Text="30 ℃"
+                            FontSize="24" />
+                    </StackLayout>
+                </Frame>
             </VerticalStackLayout>
             <VerticalStackLayout                 
                 VerticalOptions="Center"
@@ -72,7 +105,7 @@
                 VerticalOptions="Center"
                 x:Name="ButtonsLayoutRight" >
                 <Button BindingContext="{x:Reference MainPageObject}"
-                    Clicked="Button_Clicked" 
+                    Clicked="Button_Clicked_2" 
                     ImageSource="arrowrightsmall.png"
                     BackgroundColor="{Binding BackgroundColor}" 
                     HorizontalOptions="End"
