@@ -44,13 +44,17 @@ public partial class MainPage : ContentPage {
     private const double ThermometerBottomBorder = 186;
 
     /** Соотношение исходной высоты термометра и высоты страницы. */
-    private double thermometerScale = 1;
+    private static double thermometerScale = 1;
 
     /** Метод, возвращающий значение от 0 до 1 для отображаемой температуры. */
     private double getFloatTemperature( double temp ) => ( temp - ColdBorder ) / ( WarmBorder - ColdBorder );
 
-    /** Функция, возвращающая значение от 0 до 1 для отображаемой температуры. */
-    private void calcThermometerScale() => thermometerScale = Height / ThermometerImageHeight;
+    /** Метод устанавливает текущее  */
+    private static void calcThermometerScale( double pageHeight ) {
+        if( pageHeight > 0 ) {
+            thermometerScale = pageHeight / ThermometerImageHeight;
+        }
+    }
 
     /** Функция определяет соотношение исходного размера термометра с размерами страницы. */
     private void setInfoPanel( DateTime date ) {
@@ -127,6 +131,7 @@ public partial class MainPage : ContentPage {
 
     public MainPage() {
         InitializeComponent();
+        calcThermometerScale( Height );
     }
 
     /** */
@@ -152,6 +157,6 @@ public partial class MainPage : ContentPage {
      * */
     protected override void OnSizeAllocated( double width, double height ) {
         base.OnSizeAllocated( width, height );
-        calcThermometerScale();
+        calcThermometerScale( Height );
     }
 }

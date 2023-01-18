@@ -1,11 +1,9 @@
 ﻿namespace Weather;
 
-public partial class App : Application
-{
+public partial class App : Application {
 	private static readonly Dictionary<DateTime, MainPage> WeatherPages = new();
-	public App() {
+    public App() {
 		InitializeComponent();
-
 		MainPage = new MainPage();
 	}
 
