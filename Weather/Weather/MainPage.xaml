@@ -28,19 +28,19 @@
                 VerticalOptions="End">
                 <Rectangle
                     x:Name= "ThermometerBar"
-                    Fill = "#097A86"
-                    RadiusX = "5"
+                    Fill = "#DB5166"
+                    RadiusX = "20"
                     RadiusY = "10"
-                    WidthRequest = "60"/>
+                    WidthRequest = "0"
+                    HeightRequest = "0"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 HorizontalOptions="Center"
-                VerticalOptions="End"
-                Margin = "0,0,0,0">
+                VerticalOptions="End">
                 <Label BindingContext = "{x:Reference ThermometerBar}"
-                    Margin="0"
                     x:Name="ThermometerBarValue"
-                    Text="asd" FontSize="Large"/>
+                    Text="" 
+                    FontSize="Large"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 VerticalOptions="End"
@@ -52,7 +52,7 @@
                     Stroke="Black"
                     StrokeThickness="3"
                     RadiusX="50"
-                    RadiusY="10"
+                    RadiusY="70"
                     WidthRequest="200"
                     HeightRequest="100"
                     HorizontalOptions="Start" />

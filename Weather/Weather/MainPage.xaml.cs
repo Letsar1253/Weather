@@ -1,4 +1,6 @@
-﻿namespace Weather;
+﻿using Microsoft.Maui;
+
+namespace Weather;
 
 enum WeatherType {
     Sunny,
@@ -31,6 +33,9 @@ public partial class MainPage : ContentPage
 	readonly double ColdBorder = -40, WarmBorder = 50;
 
     const double ThermometerImageHeight = 560;
+    const double ThermometerTopBorder = ThermometerImageHeight - 18;
+    const double ThermometerBottomBorder = 186;
+
     double thermometerScale = 1;
 
     private double getFloatTemperature( double temp ) => ( temp - ColdBorder ) / ( WarmBorder - ColdBorder );
@@ -67,44 +72,41 @@ public partial class MainPage : ContentPage
         return Color.FromRgb( r, g, b );
 	}
 
-    //Easing.Linear,
-    //Easing.SinOut,
-    //Easing.SinIn,
-    //Easing.SinInOut,
-    //Easing.CubicIn,
-    //Easing.CubicOut,
-    //Easing.CubicInOut,
-    //Easing.BounceOut,
-    //Easing.BounceIn,
-    //Easing.SpringIn,
-    //Easing.SpringOut,
-
     private void Button_Clicked(object sender, EventArgs e) {
         setTemperature( 50 );
     }
 
     private void setThermometerBar( double temp ) {
-        var thermometerBarStart = thermometerScale * 111;
-        var thermometerBarEnd = ( ThermometerImageHeight - 20 ) * thermometerScale;
+        var thermometerBarStart = ThermometerBottomBorder * thermometerScale;
+        var thermometerBarEnd   = ThermometerTopBorder * thermometerScale;
         var thermometerBarValue = ( thermometerBarEnd - thermometerBarStart )
-                                    * getFloatTemperature( temp )
-                                    * thermometerScale;
+                                    * getFloatTemperature( temp );
 
         var animationThermometer = new Animation(
-            value => ThermometerBar.HeightRequest = value,
-            ThermometerBar.Height,
-            thermometerBarValue - thermometerBarStart,
-            Easing.Linear
-        );
+            value => ThermometerBar.HeightRequest = value, 0, thermometerBarValue );
 
+        var barWidth = 44 * thermometerScale;
+        ThermometerBar.WidthRequest = 44 * thermometerScale;
         ThermometerBar.Margin = new Thickness( 0, 0, 0, (int)thermometerBarStart );
 
-        //ThermometerBar.Animate( "HeightRequest", animationThermometer, rate: 16, length: 1000);
+        ThermometerBar.Animate( "HeightRequest",
+            animationThermometer,
+            length: 1200,
+            easing: Easing.CubicOut,
+            finished: ( v, c ) => {
+                ThermometerBarValue.Text = temp.ToString();
 
-        //ThermometerBarValue.Text = temp.ToString();
+                var positionValueAnim = new Animation( 
+                    value => ThermometerBarValue.Margin = new Thickness( 2 * barWidth, 0, 0, value ),
+                    thermometerBarStart + thermometerBarValue - 100,
+                    thermometerBarStart + thermometerBarValue - 44,
+                    easing: Easing.CubicOut
+                );
+                var opacityValueAnim = new Animation( value => ThermometerBarValue.Opacity = value, 0, 1 );
 
-        //var animationValue = new Animation( value => ThermometerBarValue.Opacity = value, 0, 1);
-        //ThermometerBarValue.Animate( "Opacity", animationValue, length: 300 );
+                ThermometerBarValue.Animate( "Margin", positionValueAnim, length: 700 );
+                ThermometerBarValue.Animate( "Opacity", opacityValueAnim, length: 400 );
+            } );
     }
 
     public MainPage() {
@@ -118,7 +120,7 @@ public partial class MainPage : ContentPage
         calcThermometerScale();
 
         setDayData( date );
-		setTemperature( temperature );
+		//setTemperature( temperature );
 		setWeatherImage( weatherType );
     }
 
