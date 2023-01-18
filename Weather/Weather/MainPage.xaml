@@ -25,13 +25,24 @@
             <VerticalStackLayout
                 x:Name = "ThermometerBarLayout"
                 HorizontalOptions="Center"
-                VerticalOptions="Center">
-                <Rectangle BindingContext="{x:Reference Thermometer}"
-                    Fill="Pink"
-                    RadiusX="0"
-                    RadiusY="4"
-                    WidthRequest="300"
-                    HeightRequest = "400"/>
+                VerticalOptions="End"
+                Margin = "0,0,0,250">
+                <Rectangle BindingContext = "{x:Reference Thermometer}"
+                    Fill = "#C97A86"
+                    RadiusX = "5"
+                    RadiusY = "10"
+                    WidthRequest = "60"
+                    HeightRequest = "0"
+                    x:Name = "ThermometerBar"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                Margin = "0,0,0,250">
+                <Label BindingContext = "{x:Reference ThermometerBar}"
+                    Margin="0,0,0,19"
+                    x:Name="ThermometerBarValue"
+                    Text="123"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 VerticalOptions="End"
@@ -48,9 +59,27 @@
                     HeightRequest="100"
                     HorizontalOptions="Start" />
             </VerticalStackLayout>
-            <VerticalStackLayout
+            <VerticalStackLayout                 
                 VerticalOptions="Center"
-                x:Name="ButtonsLayout">
+                x:Name="ButtonsLayoutLeft" >
+                <Button BindingContext="{x:Reference MainPageObject}"
+                    Clicked="Button_Clicked" 
+                    ImageSource="arrowleftsmall.png"
+                    BackgroundColor="{Binding BackgroundColor}" 
+                    HorizontalOptions="Start"     
+                    BorderWidth="0"
+                    />
+            </VerticalStackLayout>
+            <VerticalStackLayout                 
+                VerticalOptions="Center"
+                x:Name="ButtonsLayoutRight" >
+                <Button BindingContext="{x:Reference MainPageObject}"
+                    Clicked="Button_Clicked" 
+                    ImageSource="arrowrightsmall.png"
+                    BackgroundColor="{Binding BackgroundColor}" 
+                    HorizontalOptions="End"
+                    BorderWidth="0"
+                    />
             </VerticalStackLayout>
         </Grid>
         

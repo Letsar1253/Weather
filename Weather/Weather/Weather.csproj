@@ -49,6 +49,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\arrowleftbig.svg" />
+	  <None Remove="Resources\Images\arrowleftsmall.svg" />
+	  <None Remove="Resources\Images\arrowrightbig.svg" />
+	  <None Remove="Resources\Images\arrowrightsmall.svg" />
 	  <None Remove="Resources\Images\thermometer.svg" />
 	</ItemGroup>
 

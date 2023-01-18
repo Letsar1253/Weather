@@ -1,4 +1,6 @@
-﻿namespace Weather;
+﻿using Microsoft.Maui.Controls;
+
+namespace Weather;
 
 enum WeatherType {
     Sunny,
@@ -59,6 +61,46 @@ public partial class MainPage : ContentPage
 
         return Color.FromRgb( r, g, b );
 	}
+
+    int i = 0;
+    Easing[] Easings = new Easing[]
+    {
+        Easing.Linear,
+        Easing.SinOut,
+        Easing.SinIn,
+        Easing.SinInOut,
+        Easing.CubicIn,
+        Easing.CubicOut,
+        Easing.CubicInOut,
+        Easing.BounceOut,
+        Easing.BounceIn,
+        Easing.SpringIn,
+        Easing.SpringOut,
+    };
+    private async void Button_Clicked(object sender, EventArgs e)
+    {
+        //передаваемое значение температуры
+        var tempValue = 50;
+
+        var thermometerBarStart = ThermometerBarLayout.Margin.Top;
+        var thermometerBarEnd = ThermometerLayout.Height - 20;
+
+        var thermometerBarValue = (thermometerBarEnd - thermometerBarStart) * (tempValue - ColdBorder) / (WarmBorder - ColdBorder);
+        var animationThermometer = new Animation((value) =>
+        {
+            ThermometerBar.HeightRequest = value;
+        }, ThermometerBar.Height, thermometerBarValue - thermometerBarStart, Easing.Linear);
+
+        ThermometerBar.Animate("HeightRequest", animationThermometer, length: 1000);
+
+        ThermometerBarValue.Text = tempValue.ToString();
+
+        var animationValue = new Animation((value) =>
+        {
+            ThermometerBarValue.Opacity = value;
+        }, 0, 1);
+        ThermometerBarValue.Animate("Opacity", animationValue, length: 1000);
+    }
 
     public MainPage()
 	{
