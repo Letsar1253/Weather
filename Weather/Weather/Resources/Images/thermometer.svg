@@ -1,0 +1,14 @@
+<svg width="220" height="560" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>Layer 1</title>
+  <defs stroke="null" transform="translate(-339 -248) translate(-34 36) translate(158.667 0) translate(0 158.667) translate(794 864) scale(0.541158 0.541158) translate(-794 -864)" id="svg_49">
+   <clipPath stroke="null" id="svg_7" clipPathUnits="userSpaceOnUse">
+    <path stroke="null" data-original="#000000" fill="#000000" id="svg_50" d="m-376.32585,709.70745l512,0l0,-512l-512,0l0,512z"/>
+   </clipPath>
+  </defs>
+  <ellipse fill="#DDDDDD" cx="110" cy="449.95449" id="svg_1" rx="110" ry="110" stroke="#000" stroke-width="0"/>
+  <rect fill="#DDDDDD" x="73.5" y="22.9545" width="73" height="430.99999" id="svg_3" stroke="#000" stroke-dasharray="2,2" stroke-width="0"/>
+  <ellipse fill="#DDDDDD" cx="110" cy="22.95877" id="svg_8" rx="36.40872" ry="22.95877" stroke="#000" stroke-width="0"/>
+  <ellipse stroke-width="0" stroke="#000" ry="92.4997" rx="92.4997" id="svg_11" cy="451.16503" cx="110" fill="#C97A86"/>
+ </g>
+</svg>

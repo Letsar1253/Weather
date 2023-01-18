@@ -37,9 +37,6 @@ public partial class MainPage : ContentPage
     private void setTemperature( double temperature ) { 
         MainPageObject.BackgroundColor = getGradientColor(
             ( temperature - ColdBorder ) / ( WarmBorder - ColdBorder ) );
-
-
-        // Настроить градусник
     }
 
     private void setWeatherImage( WeatherType weatherType ) {
@@ -47,19 +44,9 @@ public partial class MainPage : ContentPage
             Source = weatherTypeImages[ weatherType ] + ".png",
             HeightRequest = 150,
             HorizontalOptions = LayoutOptions.Start,
-            Margin = 8
+            Margin = 12
         };
-        //MainPageLayout.Children.Add( weatherImage );
         WeatherImageLayout.Children.Add( weatherImage );
-
-        //Image thermometerImage = new()
-        //{
-        //    Source = "thermometer.png",
-        //    HeightRequest = 500,
-        //    HorizontalOptions = LayoutOptions.Center,
-        //    Margin = 10
-        //};
-        //ThermometerLayout.Children.Add( thermometerImage );
     }
 
     private Color getGradientColor( double value ) {
@@ -85,10 +72,6 @@ public partial class MainPage : ContentPage
 		setDayData( date );
 		setTemperature( temperature );
 		setWeatherImage( weatherType );
-    }
-
-	private void OnCounterClicked(object sender, EventArgs e) {
-        
     }
 }
 

@@ -5,78 +5,40 @@
              x:Name="MainPageObject">
 
     <ScrollView x:Name="MainPageScrollView">
-        
-            <!--<Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="2*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="100" />
-                </Grid.RowDefinitions>
-                <Label Text="aboba4"/>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="aboba123"/>
-            </Grid>-->
         <Grid>
-            <!--<VerticalStackLayout
-            x:Name="MainPageLayout"
-            Spacing="0"
-            VerticalOptions="Center"
-            BackgroundColor="Blue">
-
-            <Rectangle
-                HorizontalOptions = "Center"
-                WidthRequest="100"
-                HeightRequest = "100"
-                BackgroundColor = "Pink" />
-
-            <Label
-                Text="nigger, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Button
-                Text="Update"
-                Clicked="OnCounterClicked"
-                />
-            </VerticalStackLayout>-->
-            <!--<VerticalStackLayout 
-                            VerticalOptions="Start"
-                            BackgroundColor="Yellow"
-                            HeightRequest="600"/>-->
             <VerticalStackLayout
                 VerticalOptions="Start"
                 x:Name="WeatherImageLayout"
                 />
             <VerticalStackLayout
+                x:Name = "ThermometerLayout"
                 HorizontalOptions="Center"
-                VerticalOptions="End"
-                x:Name="ThermometerLayout" >
-                <!--<Image
-                    Source="therm1111.png"
-                    />-->
-                <Rectangle
-                    Fill="Grey"
-                    WidthRequest="80"
-                    HeightRequest="200" 
-                    ZIndex="6"
+                VerticalOptions="Center">
+                <Image BindingContext="{x:Reference MainPageObject}"
+                    x:Name = "Thermometer"
+                    Source = "thermometer.png"
+                    VerticalOptions = "Center"
+                    HorizontalOptions = "Center"
+                    HeightRequest = "{Binding Height}"
                     />
-                <Ellipse
-                    Fill="Grey"
-                    WidthRequest="200"
-                    HeightRequest="200"
-                    ZIndex="5"
-                    />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                x:Name = "ThermometerBarLayout"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Rectangle BindingContext="{x:Reference Thermometer}"
+                    Fill="Pink"
+                    RadiusX="0"
+                    RadiusY="4"
+                    WidthRequest="300"
+                    HeightRequest = "400"/>
             </VerticalStackLayout>
             <VerticalStackLayout
                 VerticalOptions="End"
                 HorizontalOptions="Start"
-                x:Name="InformationLayout"
-                >
-                <Rectangle 
+                x:Name="InformationLayout">
+                <Rectangle
+                    x:Name = "DateInfoPanel"
                     Fill="Blue"
                     Stroke="Black"
                     StrokeThickness="3"
@@ -88,8 +50,8 @@
             </VerticalStackLayout>
             <VerticalStackLayout
                 VerticalOptions="Center"
-                x:Name="ButtonsLayout"
-                />
+                x:Name="ButtonsLayout">
+            </VerticalStackLayout>
         </Grid>
         
         
