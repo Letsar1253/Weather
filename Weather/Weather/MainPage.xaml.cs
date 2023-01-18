@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui;
-
-namespace Weather;
+﻿namespace Weather;
 
 enum WeatherType {
     Sunny,
@@ -14,8 +12,7 @@ enum WeatherType {
     Thunder_Rain
 };
 
-public partial class MainPage : ContentPage
-{
+public partial class MainPage : ContentPage {
     /** Коллекция изображений погоды. */
     readonly Dictionary<WeatherType, string> weatherTypeImages = new() {
         { WeatherType.Sunny,            "sunny" },
@@ -130,22 +127,23 @@ public partial class MainPage : ContentPage
 
     public MainPage() {
         InitializeComponent();
+    }
 
-        //WeatherType weatherType = WeatherType.Sunny;
-		//double temperature = 31.5;
-		//DateTime date = new();
-
-        calcThermometerScale();
-		setWeatherImage( WeatherType.Sunny );
+    /** */
+    public void setupPage() {
+        setWeatherImage( WeatherType.Sunny );
+        setTemperature( 31.5 );
+        setInfoPanel( new DateTime() );
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */
     private async void OnClickPreviousDayButton( object _, EventArgs __ ) {
+        await Navigation.PushModalAsync( await App.GetPageByDay( DateTime.Now ) );
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на следующий день. */
     private async void OnClickNextDayButton( object _, EventArgs __ ) {
-        //Navigation.PushModalAsync( new MainPage() );
+        await Navigation.PushModalAsync( await App.GetPageByDay( DateTime.Now ) );
     }
 
     /** 
