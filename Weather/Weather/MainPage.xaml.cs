@@ -37,11 +37,6 @@ public partial class MainPage : ContentPage
 
     private void calcThermometerScale() => thermometerScale = Height / ThermometerImageHeight;
 
-    private void initThermometerBar() {
-        calcThermometerScale();
-        ThermometerBar.Margin = new( 0, 0, 0, thermometerScale * 111 );
-    }
-
     private void setDayData( DateTime date ) {
 
 	}
@@ -102,17 +97,14 @@ public partial class MainPage : ContentPage
             Easing.Linear
         );
 
-        ThermometerBar.Margin = new( 0, 0, 0, thermometerBarStart );
-        ThermometerBar.Animate( "HeightRequest",
-            animationThermometer,
-            rate: 16,
-            length: 1000,
-            finished: ( v, c ) => {
-                ThermometerBarValue.Text = temp.ToString();
+        ThermometerBar.Margin = new Thickness( 0, 0, 0, (int)thermometerBarStart );
 
-                var animationValue = new Animation( value => ThermometerBarValue.Opacity = value, 0, 1);
-                ThermometerBarValue.Animate( "Opacity", animationValue, length: 300 );
-            } );
+        //ThermometerBar.Animate( "HeightRequest", animationThermometer, rate: 16, length: 1000);
+
+        //ThermometerBarValue.Text = temp.ToString();
+
+        //var animationValue = new Animation( value => ThermometerBarValue.Opacity = value, 0, 1);
+        //ThermometerBarValue.Animate( "Opacity", animationValue, length: 300 );
     }
 
     public MainPage() {
@@ -123,7 +115,7 @@ public partial class MainPage : ContentPage
 		double temperature = 31.5;
 		DateTime date = new();
 
-        initThermometerBar();
+        calcThermometerScale();
 
         setDayData( date );
 		setTemperature( temperature );
