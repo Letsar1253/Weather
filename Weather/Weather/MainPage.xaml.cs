@@ -150,13 +150,13 @@ public partial class MainPage : ContentPage {
     /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */
     private async void OnClickPreviousDayButton(object _, EventArgs __)
     {
-        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now /*при передаче даты, создать на предыдущий день (время 00:00)*/));
+        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now.AddDays(-1) /*при передаче даты, создать на предыдущий день (время 00:00)*/));
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на следующий день. */
     private async void OnClickNextDayButton(object _, EventArgs __)
     {
-        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now /*при передаче даты, создать на следующий день (время 00:00)*/));
+        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now.AddDays(1) /*при передаче даты, создать на следующий день (время 00:00)*/));
     }
 
     /** 
