@@ -25,7 +25,7 @@ namespace Server.DownloadersProvider.Mappers
             var dailyWeather = new DailyWeather
             {
                 DailyWeatherId = Guid.NewGuid(),
-                Date = forecast.datetime is not null ? DateTime.Parse(forecast.datetime) : null,
+                Date = forecast.datetime is not null ? DateTime.Parse(forecast.datetime).ToUniversalTime().Date : null,
                 SnowDepth = forecast.snow_depth,
                 AverageTemperature = forecast.temp,
                 AverageDewPoint = forecast.dewpt,

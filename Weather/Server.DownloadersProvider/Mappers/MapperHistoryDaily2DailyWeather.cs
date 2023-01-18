@@ -30,7 +30,7 @@ namespace Server.DownloadersProvider.Mappers
             var dailyWeather = new DailyWeather
             {
                 DailyWeatherId = Guid.NewGuid(),
-                Date = Historyday.datetime is not null ? DateTime.Parse(Historyday.datetime) : null,
+                Date = Historyday.datetime is not null ? DateTime.Parse(Historyday.datetime).ToUniversalTime().Date : null,
                 SnowDepth = Historyday.snow_depth,
                 AverageTemperature = Historyday.temp,
                 AverageDewPoint = Historyday.dewpt,

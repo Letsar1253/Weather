@@ -111,11 +111,11 @@ public partial class MainPage : ContentPage {
     public MainPage() {
         InitializeComponent();
         calcThermometerScale( Height );
-        setupPage( new WeatherModel() {
-            Day = DateTime.Now,
-            TemperatureValue = 34,
-            WeatherTypeName = "sunny"
-        });
+        //setupPage( new WeatherModel() {
+        //    Day = DateTime.Now,
+        //    TemperatureValue = 34,
+        //    WeatherTypeName = "sunny"
+        //});
     }
 
     /** Метод устанавливает элементы страницы по данным. */

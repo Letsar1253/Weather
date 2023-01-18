@@ -25,6 +25,7 @@ namespace Server.DownloadersProvider.Mappers
             var currentWeather = new CurrentWeather
             {
                 Id = Guid.NewGuid(),
+                Date = DateTime.Now.ToUniversalTime().Date,
                 DewPoint = currentObs.dewpt,
                 Temperature = currentObs.temp,
                 ApparentTemperature = currentObs.app_temp,
