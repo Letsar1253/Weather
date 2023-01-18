@@ -1,4 +1,4 @@
-﻿using Common.Data.Models;
+﻿using Server.DatabaseProvider.Models;
 using Server.DownloadersProvider.Downloaders.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -15,5 +15,9 @@ namespace Server.DownloadersProvider
         public Task<List<DailyWeather>> GetForecastDailyWeathers();
 
         public Task<List<HourlyWeather>> GetForecastHourlyWeathers();
+
+        public Task<List<DailyWeather>> GetHistoryDailyWeathers();
+
+        public Task<List<HourlyWeather>> GetHistoryHourlyWeathers();
     }
 }

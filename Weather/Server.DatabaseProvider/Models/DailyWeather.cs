@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.DatabaseProvider.Models
 {
-    internal class DailyWeather
+    public class DailyWeather : Weather
     {
         [Key]
         public Guid DailyWeatherId { get; set; }

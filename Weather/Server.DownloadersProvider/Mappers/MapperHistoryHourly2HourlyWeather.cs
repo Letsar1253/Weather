@@ -1,4 +1,4 @@
-﻿using Common.Data.Models;
+﻿using Server.DatabaseProvider.Models;
 using Server.DownloadersProvider.Models;
 using System;
 using System.Collections.Generic;

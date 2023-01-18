@@ -1,6 +1,6 @@
 ﻿using Server.DownloadersProvider.Models;
 using Server.DownloadersProvider.Mappers;
-using Common.Data.Models;
+using Server.DatabaseProvider.Models;
 using Server.DownloadersProvider.Downloaders.Interfaces;
 
 namespace Server.DownloadersProvider.Downloaders

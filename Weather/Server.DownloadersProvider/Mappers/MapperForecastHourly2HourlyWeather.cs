@@ -1,5 +1,5 @@
 ﻿using Server.DownloadersProvider.Models;
-using Common.Data.Models;
+using Server.DatabaseProvider.Models;
 
 namespace Server.DownloadersProvider.Mappers
 {

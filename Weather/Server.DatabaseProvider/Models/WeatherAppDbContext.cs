@@ -9,10 +9,10 @@ namespace Server.DatabaseProvider.Models
 {
     internal class WeatherAppDbContext : DbContext
     {
-        public DbSet<CurrentWeather> currentWeather { get; set; }
-        public DbSet<DailyWeather> dailyWeather { get; set; }
-        public DbSet<HourlyWeather> hourlyWeather { get; set; }
-        public DbSet<WeatherIcon> weatherIcon { get; set; }
+        public DbSet<CurrentWeather> CurrentWeather { get; set; }
+        public DbSet<DailyWeather> DailyWeather { get; set; }
+        public DbSet<HourlyWeather> HourlyWeather { get; set; }
+        public DbSet<WeatherIcon> WeatherIcon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
