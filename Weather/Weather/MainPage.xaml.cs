@@ -135,20 +135,23 @@ public partial class MainPage : ContentPage {
     }
 
     /** */
-    public void setupPage() {
-        setWeatherImage( WeatherType.Sunny );
-        setTemperature( 31.5 );
-        setInfoPanel( new DateTime() );
+    public void setupPage(/*здесь получаем данные и прокидываем везде где надо*/)
+    {
+        setWeatherImage(WeatherType.Sunny);
+        setTemperature(50);
+        setInfoPanel(new DateTime());
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */
-    private async void OnClickPreviousDayButton( object _, EventArgs __ ) {
-        await Navigation.PushModalAsync( await App.GetPageByDay( DateTime.Now ) );
+    private async void OnClickPreviousDayButton(object _, EventArgs __)
+    {
+        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now /*при передаче даты, создать на предыдущий день (время 00:00)*/));
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на следующий день. */
-    private async void OnClickNextDayButton( object _, EventArgs __ ) {
-        await Navigation.PushModalAsync( await App.GetPageByDay( DateTime.Now ) );
+    private async void OnClickNextDayButton(object _, EventArgs __)
+    {
+        await Navigation.PushModalAsync(await App.GetPageByDay(DateTime.Now /*при передаче даты, создать на следующий день (время 00:00)*/));
     }
 
     /** 
