@@ -4,8 +4,23 @@
              x:Class="Weather.MainPage"
              x:Name="MainPageObject">
 
-    <ScrollView>
-        <VerticalStackLayout
+    <ScrollView x:Name="MainPageScrollView">
+        
+            <!--<Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="100" />
+                </Grid.RowDefinitions>
+                <Label Text="aboba4"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="aboba123"/>
+            </Grid>-->
+        <Grid>
+            <!--<VerticalStackLayout
             x:Name="MainPageLayout"
             Spacing="0"
             VerticalOptions="Center"
@@ -23,7 +38,61 @@
                 FontSize="32"
                 HorizontalOptions="Center" />
 
-        </VerticalStackLayout>
+            <Button
+                Text="Update"
+                Clicked="OnCounterClicked"
+                />
+            </VerticalStackLayout>-->
+            <!--<VerticalStackLayout 
+                            VerticalOptions="Start"
+                            BackgroundColor="Yellow"
+                            HeightRequest="600"/>-->
+            <VerticalStackLayout
+                VerticalOptions="Start"
+                x:Name="WeatherImageLayout"
+                />
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                VerticalOptions="End"
+                x:Name="ThermometerLayout" >
+                <!--<Image
+                    Source="therm1111.png"
+                    />-->
+                <Rectangle
+                    Fill="Grey"
+                    WidthRequest="80"
+                    HeightRequest="200" 
+                    ZIndex="6"
+                    />
+                <Ellipse
+                    Fill="Grey"
+                    WidthRequest="200"
+                    HeightRequest="200"
+                    ZIndex="5"
+                    />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                VerticalOptions="End"
+                HorizontalOptions="Start"
+                x:Name="InformationLayout"
+                >
+                <Rectangle 
+                    Fill="Blue"
+                    Stroke="Black"
+                    StrokeThickness="3"
+                    RadiusX="50"
+                    RadiusY="10"
+                    WidthRequest="200"
+                    HeightRequest="100"
+                    HorizontalOptions="Start" />
+            </VerticalStackLayout>
+            <VerticalStackLayout
+                VerticalOptions="Center"
+                x:Name="ButtonsLayout"
+                />
+        </Grid>
+        
+        
     </ScrollView>
 
 </ContentPage>

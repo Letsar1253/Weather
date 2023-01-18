@@ -45,10 +45,21 @@ public partial class MainPage : ContentPage
     private void setWeatherImage( WeatherType weatherType ) {
         Image weatherImage = new() {
             Source = weatherTypeImages[ weatherType ] + ".png",
-            HeightRequest = 30,
-            HorizontalOptions = LayoutOptions.Center
+            HeightRequest = 150,
+            HorizontalOptions = LayoutOptions.Start,
+            Margin = 8
         };
-        MainPageLayout.Children.Add( weatherImage );
+        //MainPageLayout.Children.Add( weatherImage );
+        WeatherImageLayout.Children.Add( weatherImage );
+
+        //Image thermometerImage = new()
+        //{
+        //    Source = "thermometer.png",
+        //    HeightRequest = 500,
+        //    HorizontalOptions = LayoutOptions.Center,
+        //    Margin = 10
+        //};
+        //ThermometerLayout.Children.Add( thermometerImage );
     }
 
     private Color getGradientColor( double value ) {
@@ -77,6 +88,7 @@ public partial class MainPage : ContentPage
     }
 
 	private void OnCounterClicked(object sender, EventArgs e) {
-	}
+        
+    }
 }
 
