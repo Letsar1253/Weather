@@ -56,4 +56,8 @@
 	  <None Remove="Resources\Images\thermometer.svg" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Server.Provider\Server.Provider.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -9,6 +9,7 @@ namespace Server.DownloadersProvider.Mappers
         {
             var weatherIcon = new WeatherIcon
             {
+                WeatherIconId = Guid.NewGuid(),
                 Icon = inlineModel.icon,
                 Code = inlineModel.code,
                 Description = inlineModel.description

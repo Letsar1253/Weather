@@ -29,6 +29,7 @@ namespace Server.DownloadersProvider.Mappers
         {
             var hourlyWeather = new HourlyWeather
             {
+                HourlyWeatherId = Guid.NewGuid(),
                 DateTime = history.timestamp_local is not null ? DateTime.Parse(history.timestamp_local) : null,
                 SnowDepth = history.snow,
                 Temperature = history.temp,

@@ -15,7 +15,7 @@ namespace Server.DatabaseProvider
     {
         private readonly WeatherAppDbContext _context;
 
-        internal ContextManager(WeatherAppDbContext context)
+        public ContextManager(WeatherAppDbContext context)
         {
             _context = context;
         }

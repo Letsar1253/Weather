@@ -15,8 +15,11 @@ namespace Server.Provider
         private IDownloadProvider _downloadProvider;
         private ContextManager _contextManager;
 
-        public DataProvider(IDownloadProviderFactory downloadProviderFactory)
+        public DataProvider()
         {
+            var context = new WeatherAppDbContext();
+            _contextManager = new ContextManager(context);
+            var downloadProviderFactory = new DownloadProviderFactory();
             _downloadProvider = downloadProviderFactory.CreateDownloadProvider("Tomsk", "ru");
         }
 

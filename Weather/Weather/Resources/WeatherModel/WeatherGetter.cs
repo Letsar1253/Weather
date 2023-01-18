@@ -11,16 +11,38 @@ namespace Weather.Resources.WeatherModel
     public class WeatherGetter
     {
         private IDataProvider dataProvider;
-        public WeatherModel GetData(DateTime day)
+
+        public WeatherGetter()
+        {
+            dataProvider = new DataProvider();
+        }
+
+        public async Task<WeatherModel> GetData(DateTime day)
         {
             WeatherModel weatherModel = new WeatherModel();
-            var timeNow = DateTime.Now;
+            var timeNow = DateTime.Now.Date;
             if (day == timeNow)
-                dataProvider.GetCurrentWheather(day);
+            {
+                var item = await dataProvider.GetCurrentWheather(day);
+                weatherModel.Day = item.Date;
+                weatherModel.TemperatureValue = (double)item.Temperature;
+                weatherModel.WeatherTypeName = "sunny";
+            }
             else if (day > timeNow)
-                dataProvider.GetForecastWheather(day);
+            {
+                var item = await dataProvider.GetForecastWheather(day);
+                weatherModel.Day = (DateTime)item.Date;
+                weatherModel.TemperatureValue = (double)item.AverageTemperature;
+                weatherModel.WeatherTypeName = "sunny";
+            }
             else
-                dataProvider.GetHistoryWheather(day);
+            {
+                var item = await dataProvider.GetHistoryWheather(day);
+                weatherModel.Day = (DateTime)item.Date;
+                weatherModel.TemperatureValue = (double)item.AverageTemperature;
+                weatherModel.WeatherTypeName = "sunny";
+            }
+
             return weatherModel;
         }
     }

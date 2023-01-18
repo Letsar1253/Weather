@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Server.DatabaseProvider.Models
 {
-    internal class WeatherAppDbContext : DbContext
+    public class WeatherAppDbContext : DbContext
     {
         public DbSet<CurrentWeather> CurrentWeather { get; set; }
         public DbSet<DailyWeather> DailyWeather { get; set; }
