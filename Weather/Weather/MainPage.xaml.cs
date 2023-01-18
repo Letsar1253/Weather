@@ -1,6 +1,4 @@
-﻿using Microsoft.Maui.Controls;
-
-namespace Weather;
+﻿namespace Weather;
 
 enum WeatherType {
     Sunny,
@@ -32,13 +30,25 @@ public partial class MainPage : ContentPage
 	readonly Color WarmColor = Color.FromRgb( 255, 236, 225 );
 	readonly double ColdBorder = -40, WarmBorder = 50;
 
-	private void setDayData( DateTime date ) {
+    const double ThermometerImageHeight = 560;
+    double thermometerScale = 1;
+
+    private double getFloatTemperature( double temp ) => ( temp - ColdBorder ) / ( WarmBorder - ColdBorder );
+
+    private void calcThermometerScale() => thermometerScale = Height / ThermometerImageHeight;
+
+    private void initThermometerBar() {
+        calcThermometerScale();
+        ThermometerBar.Margin = new( 0, 0, 0, thermometerScale * 111 );
+    }
+
+    private void setDayData( DateTime date ) {
 
 	}
 
     private void setTemperature( double temperature ) { 
-        MainPageObject.BackgroundColor = getGradientColor(
-            ( temperature - ColdBorder ) / ( WarmBorder - ColdBorder ) );
+        MainPageObject.BackgroundColor = getGradientColor( getFloatTemperature( temperature ) );
+        setThermometerBar( temperature );
     }
 
     private void setWeatherImage( WeatherType weatherType ) {
@@ -62,48 +72,50 @@ public partial class MainPage : ContentPage
         return Color.FromRgb( r, g, b );
 	}
 
-    int i = 0;
-    Easing[] Easings = new Easing[]
-    {
-        Easing.Linear,
-        Easing.SinOut,
-        Easing.SinIn,
-        Easing.SinInOut,
-        Easing.CubicIn,
-        Easing.CubicOut,
-        Easing.CubicInOut,
-        Easing.BounceOut,
-        Easing.BounceIn,
-        Easing.SpringIn,
-        Easing.SpringOut,
-    };
-    private async void Button_Clicked(object sender, EventArgs e)
-    {
-        //передаваемое значение температуры
-        var tempValue = 50;
+    //Easing.Linear,
+    //Easing.SinOut,
+    //Easing.SinIn,
+    //Easing.SinInOut,
+    //Easing.CubicIn,
+    //Easing.CubicOut,
+    //Easing.CubicInOut,
+    //Easing.BounceOut,
+    //Easing.BounceIn,
+    //Easing.SpringIn,
+    //Easing.SpringOut,
 
-        var thermometerBarStart = ThermometerBarLayout.Margin.Top;
-        var thermometerBarEnd = ThermometerLayout.Height - 20;
-
-        var thermometerBarValue = (thermometerBarEnd - thermometerBarStart) * (tempValue - ColdBorder) / (WarmBorder - ColdBorder);
-        var animationThermometer = new Animation((value) =>
-        {
-            ThermometerBar.HeightRequest = value;
-        }, ThermometerBar.Height, thermometerBarValue - thermometerBarStart, Easing.Linear);
-
-        ThermometerBar.Animate("HeightRequest", animationThermometer, length: 1000);
-
-        ThermometerBarValue.Text = tempValue.ToString();
-
-        var animationValue = new Animation((value) =>
-        {
-            ThermometerBarValue.Opacity = value;
-        }, 0, 1);
-        ThermometerBarValue.Animate("Opacity", animationValue, length: 1000);
+    private void Button_Clicked(object sender, EventArgs e) {
+        setTemperature( 50 );
     }
 
-    public MainPage()
-	{
+    private void setThermometerBar( double temp ) {
+        var thermometerBarStart = thermometerScale * 111;
+        var thermometerBarEnd = ( ThermometerImageHeight - 20 ) * thermometerScale;
+        var thermometerBarValue = ( thermometerBarEnd - thermometerBarStart )
+                                    * getFloatTemperature( temp )
+                                    * thermometerScale;
+
+        var animationThermometer = new Animation(
+            value => ThermometerBar.HeightRequest = value,
+            ThermometerBar.Height,
+            thermometerBarValue - thermometerBarStart,
+            Easing.Linear
+        );
+
+        ThermometerBar.Margin = new( 0, 0, 0, thermometerBarStart );
+        ThermometerBar.Animate( "HeightRequest",
+            animationThermometer,
+            rate: 16,
+            length: 1000,
+            finished: ( v, c ) => {
+                ThermometerBarValue.Text = temp.ToString();
+
+                var animationValue = new Animation( value => ThermometerBarValue.Opacity = value, 0, 1);
+                ThermometerBarValue.Animate( "Opacity", animationValue, length: 300 );
+            } );
+    }
+
+    public MainPage() {
         InitializeComponent();
 
         // WheaterData Какая погода, градусы, дата
@@ -111,9 +123,15 @@ public partial class MainPage : ContentPage
 		double temperature = 31.5;
 		DateTime date = new();
 
-		setDayData( date );
+        initThermometerBar();
+
+        setDayData( date );
 		setTemperature( temperature );
 		setWeatherImage( weatherType );
     }
-}
 
+    protected override void OnSizeAllocated( double width, double height ) {
+        base.OnSizeAllocated( width, height );
+        calcThermometerScale();
+    }
+}
