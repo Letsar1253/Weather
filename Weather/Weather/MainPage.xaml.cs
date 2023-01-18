@@ -124,6 +124,17 @@ public partial class MainPage : ContentPage
 		setWeatherImage( weatherType );
     }
 
+    private async void Button_Clicked_1(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("past1");
+    }
+
+    private async void Button_Clicked_2(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("future1");
+    }
+
+
     protected override void OnSizeAllocated( double width, double height ) {
         base.OnSizeAllocated( width, height );
         calcThermometerScale();
