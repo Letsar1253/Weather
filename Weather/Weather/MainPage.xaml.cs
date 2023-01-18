@@ -16,6 +16,7 @@ enum WeatherType {
 
 public partial class MainPage : ContentPage
 {
+    /** Коллекция изображений погоды. */
     readonly Dictionary<WeatherType, string> weatherTypeImages = new() {
         { WeatherType.Sunny,            "sunny" },
         { WeatherType.Rain,             "rain" },
@@ -28,29 +29,49 @@ public partial class MainPage : ContentPage
         { WeatherType.Thunder_Rain,     "thunder_rain" }
     };
 
-	readonly Color ColdColor = Color.FromRgb( 212, 244, 255 );
-	readonly Color WarmColor = Color.FromRgb( 255, 236, 225 );
+    /** Цвет самой холодной отображаемой температуры. */
+    readonly Color ColdColor = Color.FromRgb( 212, 244, 255 );
+    /** Цвет самой тёплой отображаемой температуры. */
+    readonly Color WarmColor = Color.FromRgb( 255, 236, 225 );
+
+    /** Границы самой холодной и самой тёплой температуры. */
 	readonly double ColdBorder = -40, WarmBorder = 50;
 
-    const double ThermometerImageHeight = 560;
-    const double ThermometerTopBorder = ThermometerImageHeight - 18;
-    const double ThermometerBottomBorder = 186;
+    /** Исходный размер изображения термометра. */
+    private const double ThermometerImageHeight = 560;
 
-    double thermometerScale = 1;
+    /** Высота столбца максимальной отображаемой температуры. */
+    private const double ThermometerTopBorder = ThermometerImageHeight - 18;
 
+    /** Высота столбца минимальной отображаемой температуры. */
+    private const double ThermometerBottomBorder = 186;
+
+    /** Соотношение исходной высоты термометра и высоты страницы. */
+    private double thermometerScale = 1;
+
+    /** Метод, возвращающий значение от 0 до 1 для отображаемой температуры. */
     private double getFloatTemperature( double temp ) => ( temp - ColdBorder ) / ( WarmBorder - ColdBorder );
 
+    /** Функция, возвращающая значение от 0 до 1 для отображаемой температуры. */
     private void calcThermometerScale() => thermometerScale = Height / ThermometerImageHeight;
 
-    private void setDayData( DateTime date ) {
+    /** Функция определяет соотношение исходного размера термометра с размерами страницы. */
+    private void setInfoPanel( DateTime date ) {
+        DateInfo.Text = "Четверг, 14 июля";
+        TemperatureInfo.Text = "30 ℃";
+    }
 
-	}
-
+    /**
+     * Функция, устанавливающая значение температуры на странице.
+     * Изменяет фоновый цвет страницы по градиенту.
+     * Устанавливает значение столбца термометра.
+     * */
     private void setTemperature( double temperature ) { 
         MainPageObject.BackgroundColor = getGradientColor( getFloatTemperature( temperature ) );
         setThermometerBar( temperature );
     }
 
+    /** Метод устанавливает текущее изображение погоды. */
     private void setWeatherImage( WeatherType weatherType ) {
         Image weatherImage = new() {
             Source = weatherTypeImages[ weatherType ] + ".png",
@@ -61,6 +82,7 @@ public partial class MainPage : ContentPage
         WeatherImageLayout.Children.Add( weatherImage );
     }
 
+    /** Метод возвращает цвет теплоты в зависимости от принимаемого значения. */
     private Color getGradientColor( double value ) {
 		if( value > 1 ) return WarmColor;
         if( value < 0 ) return ColdColor;
@@ -72,10 +94,7 @@ public partial class MainPage : ContentPage
         return Color.FromRgb( r, g, b );
 	}
 
-    private void Button_Clicked(object sender, EventArgs e) {
-        setTemperature( 50 );
-    }
-
+    /** Метод заполняет шкалу термометра. */
     private void setThermometerBar( double temp ) {
         var thermometerBarStart = ThermometerBottomBorder * thermometerScale;
         var thermometerBarEnd   = ThermometerTopBorder * thermometerScale;
@@ -112,29 +131,27 @@ public partial class MainPage : ContentPage
     public MainPage() {
         InitializeComponent();
 
-        // WheaterData Какая погода, градусы, дата
-        WeatherType weatherType = WeatherType.Sunny;
-		double temperature = 31.5;
-		DateTime date = new();
+        //WeatherType weatherType = WeatherType.Sunny;
+		//double temperature = 31.5;
+		//DateTime date = new();
 
         calcThermometerScale();
-
-        setDayData( date );
-		//setTemperature( temperature );
-		setWeatherImage( weatherType );
+		setWeatherImage( WeatherType.Sunny );
     }
 
-    private async void Button_Clicked_1(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("past1");
+    /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */
+    private async void OnClickPreviousDayButton( object _, EventArgs __ ) {
     }
 
-    private async void Button_Clicked_2(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("future1");
+    /** Метод срабатывает по нажатию на кнопку перехода на следующий день. */
+    private async void OnClickNextDayButton( object _, EventArgs __ ) {
+        //Navigation.PushModalAsync( new MainPage() );
     }
 
-
+    /** 
+     * Метод вызывается при измении размеров окна приложения.
+     * Актуализирует соотношение исходного размера термометра с размерами окна.
+     * */
     protected override void OnSizeAllocated( double width, double height ) {
         base.OnSizeAllocated( width, height );
         calcThermometerScale();

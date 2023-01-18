@@ -6,28 +6,22 @@
 
     <ScrollView x:Name="MainPageScrollView">
         <Grid>
+            <VerticalStackLayout x:Name = "WeatherImageLayout"
+                VerticalOptions = "Start"/>
             <VerticalStackLayout
-                VerticalOptions="Start"
-                x:Name="WeatherImageLayout"
-                />
-            <VerticalStackLayout
-                x:Name = "ThermometerLayout"
                 HorizontalOptions="Center"
                 VerticalOptions="Center">
-                <Image BindingContext="{x:Reference MainPageObject}"
-                    x:Name = "Thermometer"
+                <Image BindingContext = "{x:Reference MainPageObject}"
                     Source = "thermometer.png"
                     VerticalOptions = "Center"
                     HorizontalOptions = "Center"
-                    HeightRequest = "{Binding Height}"
-                    />
+                    HeightRequest = "{Binding Height}"/>
             </VerticalStackLayout>
             <VerticalStackLayout
-                x:Name = "ThermometerBarLayout"
-                HorizontalOptions="Center"
-                VerticalOptions="End">
+                HorizontalOptions = "Center"
+                VerticalOptions = "End">
                 <Rectangle
-                    x:Name= "ThermometerBar"
+                    x:Name = "ThermometerBar"
                     Fill = "#DB5166"
                     RadiusX = "20"
                     RadiusY = "10"
@@ -35,86 +29,57 @@
                     HeightRequest = "0"/>
             </VerticalStackLayout>
             <VerticalStackLayout
-                HorizontalOptions="Center"
-                VerticalOptions="End">
+                HorizontalOptions = "Center"
+                VerticalOptions = "End">
                 <Label BindingContext = "{x:Reference ThermometerBar}"
-                    x:Name="ThermometerBarValue"
-                    Text="" 
-                    FontSize="Large"/>
+                    x:Name = "ThermometerBarValue"
+                    Text = "" 
+                    FontSize = "Large"/>
             </VerticalStackLayout>
             <VerticalStackLayout
-                VerticalOptions="End"
-                HorizontalOptions="Start"
-                x:Name="InformationLayout" 
-                Margin="0,0,0,50" 
-                MaximumWidthRequest="200">
-                <!--<Rectangle
-                    x:Name = "DateInfoPanel"
-                    Fill="Blue"
-                    Stroke="Black"
-                    StrokeThickness="3"
-                    RadiusX="50"
-                    RadiusY="10"
-                    WidthRequest="200"
-                    HeightRequest="100"
-                    HorizontalOptions="Start">
-                </Rectangle>-->
-                <!--<Button 
-                    Text="Click to Rotate Text!"
-                    Clicked="Button_Clicked" 
-                    BackgroundColor="AliceBlue"
-                    TextColor="Black"
-                    Opacity="0.5"
-                    BorderWidth="3"
-                    BorderColor="Black" MaximumWidthRequest="150"
-                    />-->
-                <Frame 
-                    BorderColor="AliceBlue"
-                    CornerRadius="5"
-                    Padding="8" 
-                    Margin="10,0,0,100"
-                    Opacity="0.8">
+                VerticalOptions = "End"
+                HorizontalOptions = "Start"
+                Margin = "0, 0, 0, 50" 
+                MaximumWidthRequest = "200">
+                <Frame
+                    BorderColor = "AliceBlue"
+                    CornerRadius = "5"
+                    Padding = "8" 
+                    Margin = "10, 0, 0, 100"
+                    Opacity = "0.8">
                     <StackLayout>
                         <Label 
-                            Text="Информация"
-                            FontSize="16"
-                            FontAttributes="Bold" />
+                            Text = "Информация"
+                            FontSize = "16"
+                            FontAttributes = "Bold"/>
                         <BoxView 
-                            Color="Grey"
-                            HeightRequest="2"
-                            HorizontalOptions="Fill" />
-                        <Label Text="Четверг, 14 июля"/>
-                        <Label 
-                            Text="30 ℃"
-                            FontSize="24" />
+                            Color = "Grey"
+                            HeightRequest = "2"
+                            HorizontalOptions = "Fill"/>
+                        <Label x:Name = "DateInfo"/>
+                        <Label x:Name = "TemperatureInfo"
+                            FontSize="24"/>
                     </StackLayout>
                 </Frame>
             </VerticalStackLayout>
             <VerticalStackLayout                 
-                VerticalOptions="Center"
-                x:Name="ButtonsLayoutLeft" >
-                <Button BindingContext="{x:Reference MainPageObject}"
-                    Clicked="Button_Clicked" 
-                    ImageSource="arrowleftsmall.png"
-                    BackgroundColor="{Binding BackgroundColor}" 
-                    HorizontalOptions="Start"     
-                    BorderWidth="0"
-                    />
+                VerticalOptions = "Center">
+                <Button BindingContext = "{x:Reference MainPageObject}"
+                    Clicked = "OnClickPreviousDayButton" 
+                    ImageSource = "arrowleftsmall.png"
+                    BackgroundColor = "{Binding BackgroundColor}" 
+                    HorizontalOptions = "Start"     
+                    BorderWidth = "0"/>
             </VerticalStackLayout>
-            <VerticalStackLayout                 
-                VerticalOptions="Center"
-                x:Name="ButtonsLayoutRight" >
-                <Button BindingContext="{x:Reference MainPageObject}"
-                    Clicked="Button_Clicked_2" 
-                    ImageSource="arrowrightsmall.png"
-                    BackgroundColor="{Binding BackgroundColor}" 
-                    HorizontalOptions="End"
-                    BorderWidth="0"
-                    />
+            <VerticalStackLayout
+                VerticalOptions = "Center">
+                <Button BindingContext = "{x:Reference MainPageObject}"
+                    Clicked = "OnClickNextDayButton" 
+                    ImageSource = "arrowrightsmall.png"
+                    BackgroundColor = "{Binding BackgroundColor}" 
+                    HorizontalOptions = "End"
+                    BorderWidth = "0"/>
             </VerticalStackLayout>
         </Grid>
-        
-        
     </ScrollView>
-
 </ContentPage>
