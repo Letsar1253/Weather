@@ -5,7 +5,7 @@ using Server.DownloadersProvider.Downloaders.Interfaces;
 
 namespace Server.DownloadersProvider.Downloaders
 {
-    public class CurrentWeatherDownloader : ICurrentWeatherDownloader
+    internal class CurrentWeatherDownloader : ICurrentWeatherDownloader
     {
         private readonly string _pathApi = "current";
 

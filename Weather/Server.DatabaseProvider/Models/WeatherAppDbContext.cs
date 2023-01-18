@@ -9,14 +9,14 @@ namespace Server.DatabaseProvider.Models
 {
     internal class WeatherAppDbContext : DbContext
     {
-        public DbSet<CurrentWeather> currentW { get; set; }
-        public DbSet<DailyWeather> dailyW { get; set; }
-        public DbSet<HourlyWeather> hourlyW { get; set; }
-        public DbSet<WeatherIcon> wIcon { get; set; }
+        public DbSet<CurrentWeather> currentWeather { get; set; }
+        public DbSet<DailyWeather> dailyWeather { get; set; }
+        public DbSet<HourlyWeather> hourlyWeather { get; set; }
+        public DbSet<WeatherIcon> weatherIcon { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=weatherDb;Username=postgres;Password=weatherAd");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=weather;Username=postgres;Password=1253");
         }
     }
 }

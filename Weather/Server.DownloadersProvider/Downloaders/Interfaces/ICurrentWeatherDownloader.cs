@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.DownloadersProvider.Downloaders.Interfaces
 {
-    public interface ICurrentWeatherDownloader
+    internal interface ICurrentWeatherDownloader
     {
         Task<List<CurrentWeather>> Download(string city, string county);
     }

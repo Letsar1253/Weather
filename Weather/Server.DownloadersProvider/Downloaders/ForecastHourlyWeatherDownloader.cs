@@ -1,10 +1,11 @@
 ﻿using Server.DownloadersProvider.Models;
 using Server.DownloadersProvider.Mappers;
 using Common.Data.Models;
+using Server.DownloadersProvider.Downloaders.Interfaces;
 
 namespace Server.DownloadersProvider.Downloaders
 {
-    public class ForecastHourlyWeatherDownloader
+    internal class ForecastHourlyWeatherDownloader : IForecastHourlyWeatherDownloader
     {
         private readonly string _pathApi = "forecast/hourly";
 

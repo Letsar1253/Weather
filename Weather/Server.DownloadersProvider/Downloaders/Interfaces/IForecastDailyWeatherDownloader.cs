@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Server.DownloadersProvider.Downloaders.Interfaces
 {
-    public interface IForecastDailyWeatherDownloader
+    internal interface IForecastDailyWeatherDownloader
     {
         Task<List<DailyWeather>> Download(string city, string county);
     }

@@ -5,7 +5,7 @@ using Server.DownloadersProvider.Downloaders.Interfaces;
 
 namespace Server.DownloadersProvider.Downloaders
 {
-    public class ForecastDailyWeatherDownloader : IForecastDailyWeatherDownloader
+    internal class ForecastDailyWeatherDownloader : IForecastDailyWeatherDownloader
     {
         private readonly string _pathApi = "forecast/daily";
 
