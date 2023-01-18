@@ -1,41 +1,15 @@
-﻿using System.Security.Cryptography;
-using Weather.Resources.WeatherModel;
+﻿using Weather.Resources.WeatherModel;
 
 namespace Weather;
 
-enum WeatherType {
-    Sunny,
-    Rain,
-    Haze,
-    Cloudly,
-    Overcast_Cloudly,
-    Sleet,
-    Snow,
-    Thunder,
-    Thunder_Rain
-};
-
 public partial class MainPage : ContentPage {
-    /** Коллекция изображений погоды. */
-    readonly Dictionary<WeatherType, string> weatherTypeImages = new() {
-        { WeatherType.Sunny,            "sunny" },
-        { WeatherType.Rain,             "rain" },
-        { WeatherType.Haze,             "haze" },
-        { WeatherType.Cloudly,          "cloudly" },
-        { WeatherType.Overcast_Cloudly, "overcast_cloudly" },
-        { WeatherType.Sleet,            "sleet" },
-        { WeatherType.Snow,             "snow" },
-        { WeatherType.Thunder,          "thunder" },
-        { WeatherType.Thunder_Rain,     "thunder_rain" }
-    };
-
     /** Цвет самой холодной отображаемой температуры. */
     readonly Color ColdColor = Color.FromRgb( 212, 244, 255 );
     /** Цвет самой тёплой отображаемой температуры. */
     readonly Color WarmColor = Color.FromRgb( 255, 236, 225 );
 
     /** Границы самой холодной и самой тёплой температуры. */
-	readonly double ColdBorder = -40, WarmBorder = 50;
+    readonly double ColdBorder = -40, WarmBorder = 50;
 
     /** Исходный размер изображения термометра. */
     private const double ThermometerImageHeight = 560;
@@ -64,7 +38,7 @@ public partial class MainPage : ContentPage {
         //DateInfo.Text = "Четверг, 14 июля";
         //TemperatureInfo.Text = "30 ℃";
         DateInfo.Text = date.DayOfWeek.ToString() + ", " + date.Day + " " + date.Month;
-        TemperatureInfo.Text = Math.Round(temperature,1).ToString() + " ℃";
+        TemperatureInfo.Text = Math.Round( temperature, 1 ).ToString() + " ℃";
     }
 
     /**
@@ -72,15 +46,15 @@ public partial class MainPage : ContentPage {
      * Изменяет фоновый цвет страницы по градиенту.
      * Устанавливает значение столбца термометра.
      * */
-    private void setTemperature( double temperature ) { 
+    private void setTemperature( double temperature ) {
         MainPageObject.BackgroundColor = getGradientColor( getFloatTemperature( temperature ) );
         setThermometerBar( temperature );
     }
 
     /** Метод устанавливает текущее изображение погоды. */
-    private void setWeatherImage( WeatherType weatherType ) {
+    private void setWeatherImage( string weatherType ) {
         Image weatherImage = new() {
-            Source = weatherTypeImages[ weatherType ] + ".png",
+            Source = weatherType + ".png",
             HeightRequest = 150,
             HorizontalOptions = LayoutOptions.Start,
             Margin = 12
@@ -90,15 +64,15 @@ public partial class MainPage : ContentPage {
 
     /** Метод возвращает цвет теплоты в зависимости от принимаемого значения. */
     private Color getGradientColor( double value ) {
-		if( value > 1 ) return WarmColor;
+        if( value > 1 ) return WarmColor;
         if( value < 0 ) return ColdColor;
 
-		double r = WarmColor.Red * value + ColdColor.Red * ( 1 - value );
+        double r = WarmColor.Red * value + ColdColor.Red * ( 1 - value );
         double g = WarmColor.Green * value + ColdColor.Green * ( 1 - value );
         double b = WarmColor.Blue * value + ColdColor.Blue * ( 1 - value );
 
         return Color.FromRgb( r, g, b );
-	}
+    }
 
     /** Метод заполняет шкалу термометра. */
     private void setThermometerBar( double temp ) {
@@ -121,7 +95,7 @@ public partial class MainPage : ContentPage {
             finished: ( v, c ) => {
                 ThermometerBarValue.Text = temp.ToString();
 
-                var positionValueAnim = new Animation( 
+                var positionValueAnim = new Animation(
                     value => ThermometerBarValue.Margin = new Thickness( 2 * barWidth, 0, 0, value ),
                     thermometerBarStart + thermometerBarValue - 100,
                     thermometerBarStart + thermometerBarValue - 44,
@@ -137,29 +111,30 @@ public partial class MainPage : ContentPage {
     public MainPage() {
         InitializeComponent();
         calcThermometerScale( Height );
+        setupPage( new WeatherModel() {
+            Day = DateTime.Now,
+            TemperatureValue = 34,
+            WeatherTypeName = "sunny"
+        });
     }
 
-    /** */
-    public void setupPage(WeatherModel weatherData)
-    {
-
-        setWeatherImage(WeatherType.Cloudly);
-        setTemperature(weatherData.TemperatureValue);
-        setInfoPanel(weatherData.Day, weatherData.TemperatureValue);
+    /** Метод устанавливает элементы страницы по данным. */
+    public void setupPage( WeatherModel weatherData ) {
+        setWeatherImage( weatherData.WeatherTypeName );
+        setTemperature( weatherData.TemperatureValue );
+        setInfoPanel( weatherData.Day, weatherData.TemperatureValue );
     }
     private static DateTime dayNumber = DateTime.Now;
     /** Метод срабатывает по нажатию на кнопку перехода на предыдущий день. */
-    private async void OnClickPreviousDayButton(object _, EventArgs __)
-    {
-        dayNumber = dayNumber.AddDays(-1);
-        await Navigation.PushModalAsync(await App.GetPageByDay(dayNumber /*при передаче даты, создать на предыдущий день (время 00:00)*/));
+    private async void OnClickPreviousDayButton( object _, EventArgs __ ) {
+        dayNumber = dayNumber.AddDays( -1 );
+        await Navigation.PushModalAsync( await App.GetPageByDay( dayNumber ) );
     }
 
     /** Метод срабатывает по нажатию на кнопку перехода на следующий день. */
-    private async void OnClickNextDayButton(object _, EventArgs __)
-    {
-        dayNumber = dayNumber.AddDays(1);
-        await Navigation.PushModalAsync(await App.GetPageByDay(dayNumber /*при передаче даты, создать на следующий день (время 00:00)*/));
+    private async void OnClickNextDayButton( object _, EventArgs __ ) {
+        dayNumber = dayNumber.AddDays( 1 );
+        await Navigation.PushModalAsync( await App.GetPageByDay( dayNumber ) );
     }
 
     /** 
